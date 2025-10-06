@@ -1,0 +1,1994 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yesenia's Cupcake-Pag</title>
+    <meta name="description" content="Yesenia's Cupcake - Repostería artesanal especializada en cupcakes con sabores únicos, frescos y presentaciones creativas en Guatemala">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --rosa-pastel: #FFB6C1;
+            --rosa-fuerte: #FF69B4;
+            --crema: #FFF8DC;
+            --vainilla: #F5E6D3;
+            --chocolate: #8B4513;
+            --fresa: #FF6B9D;
+            --texto: #4A4A4A;
+            --blanco: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--texto);
+            overflow-x: hidden;
+            background: linear-gradient(135deg, var(--crema) 0%, var(--vainilla) 100%);
+        }
+
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--rosa-pastel), var(--fresa));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        }
+
+        .cupcake-loader {
+            width: 80px;
+            height: 80px;
+            border: 5px solid var(--blanco);
+            border-top: 5px solid var(--chocolate);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid var(--rosa-fuerte);
+            padding: 5px;
+            background: white;
+        }
+
+        .logo-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: var(--rosa-fuerte);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--texto);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--rosa-fuerte);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--rosa-fuerte);
+        }
+
+        .hero {
+            margin-top: 80px;
+            min-height: 90vh;
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.3), rgba(255, 107, 157, 0.3)),
+                        url('https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?w=1600') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, transparent 20%, rgba(255, 182, 193, 0.3) 80%);
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(-25%, -25%) rotate(0deg); }
+            50% { transform: translate(-25%, -25%) rotate(180deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: var(--rosa-fuerte);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--rosa-fuerte), var(--fresa));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 105, 180, 0.5);
+        }
+
+        section {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--rosa-fuerte);
+            margin-bottom: 3rem;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .about-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .about-card h3 {
+            color: var(--rosa-fuerte);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .value-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 50%;
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, var(--rosa-pastel));
+            transition: top 0.5s ease;
+        }
+
+        .value-card:hover::before {
+            top: 0;
+        }
+
+        .value-card:hover {
+            transform: rotate(5deg) scale(1.05);
+        }
+
+        .value-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .value-card h3 {
+            color: var(--rosa-fuerte);
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .value-card p {
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .products-filter {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 2px solid var(--rosa-pastel);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--rosa-fuerte);
+            color: white;
+            border-color: var(--rosa-fuerte);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            color: var(--rosa-fuerte);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: var(--chocolate);
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+
+        .order-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, var(--rosa-fuerte), var(--fresa));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .order-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .accordion {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .accordion-header {
+            padding: 1.5rem;
+            background: var(--rosa-pastel);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background: var(--rosa-fuerte);
+            color: white;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 1.5rem;
+        }
+
+        .accordion-content.active {
+            max-height: 3000px;
+            padding: 1.5rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: scale(1.03);
+        }
+
+        .team-avatar {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--rosa-pastel), var(--vainilla));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .team-info {
+            padding: 1.5rem;
+        }
+
+        .team-info h3 {
+            color: var(--rosa-fuerte);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .team-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--rosa-pastel);
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin: 0.5rem 0;
+        }
+
+        .team-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .doc-btn {
+            padding: 0.75rem 0.5rem;
+            background: var(--rosa-fuerte);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .doc-btn:hover {
+            background: var(--fresa);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--chocolate), #654321);
+            color: white;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: white;
+            color: var(--chocolate);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--rosa-fuerte);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 0.75rem;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .contact-form button {
+            padding: 0.75rem;
+            background: var(--rosa-fuerte);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background: var(--fresa);
+            transform: scale(1.02);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 900px;
+            width: 95%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--rosa-fuerte);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--fresa);
+            transform: rotate(90deg);
+        }
+
+        .document-viewer {
+            margin-top: 1rem;
+        }
+
+        .document-viewer h3 {
+            color: var(--rosa-fuerte);
+            margin-bottom: 1rem;
+        }
+
+        .document-viewer p {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .document-section {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        th {
+            background: var(--rosa-pastel);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #fafafa;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .value-card {
+                border-radius: 20px;
+                aspect-ratio: auto;
+            }
+
+            .team-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .logo-text {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="loader">
+        <div class="cupcake-loader"></div>
+    </div>
+
+    <header>
+        <div class="header-container">
+            <a href="#inicio" class="logo">
+                <svg class="logo-img" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="70" r="25" fill="#FFB6C1"/>
+                    <path d="M 30 70 Q 50 40 70 70" fill="#FF69B4"/>
+                    <circle cx="45" cy="55" r="3" fill="#FFF"/>
+                    <circle cx="55" cy="55" r="3" fill="#FFF"/>
+                    <circle cx="50" cy="65" r="2" fill="#FFF"/>
+                    <rect x="40" y="70" width="20" height="15" fill="#8B4513"/>
+                    <path d="M 40 70 L 35 85 L 65 85 L 60 70" fill="#654321"/>
+                </svg>
+                <span class="logo-text">Yesenia's Cupcake</span>
+            </a>
+            <nav>
+                <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+                <ul id="menu">
+                    <li><a href="#inicio" onclick="closeMenu()">Inicio</a></li>
+                    <li><a href="#sobre-nosotros" onclick="closeMenu()">Nosotros</a></li>
+                    <li><a href="#valores" onclick="closeMenu()">Valores</a></li>
+                    <li><a href="#productos" onclick="closeMenu()">Productos</a></li>
+                    <li><a href="#documentacion" onclick="closeMenu()">Documentación</a></li>
+                    <li><a href="#legal" onclick="closeMenu()">Legal</a></li>
+                    <li><a href="#equipo" onclick="closeMenu()">Equipo</a></li>
+                    <li><a href="#contacto" onclick="closeMenu()">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Yesenia's Cupcake</h1>
+            <p>Endulzando Momentos Especiales. Repostería artesanal especializada en cupcakes con sabores únicos, frescos y presentaciones creativas que combinan tradición, innovación y un toque personalizado.</p>
+            <a href="#productos" class="cta-button">Explora Nuestros Sabores</a>
+        </div>
+    </section>
+
+    <section id="sobre-nosotros">
+        <h2 class="section-title">Sobre Nosotros</h2>
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>🧁 Misión</h3>
+                <p>Ofrecer cupcakes artesanales de alta calidad, elaborados con ingredientes frescos y recetas únicas, que endulcen los momentos especiales de nuestros clientes. Buscamos brindar una experiencia inolvidable a través de sabores innovadores, un servicio cálido y una presentación creativa en cada producto.</p>
+            </div>
+            <div class="about-card">
+                <h3>✨ Visión</h3>
+                <p>Convertirnos en la pastelería de referencia en la elaboración de cupcakes personalizados en la región, reconocida por la excelencia, la innovación en sabores y el compromiso con la satisfacción de nuestros clientes, expandiendo nuestra marca y llevando dulzura a cada celebración.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="valores">
+        <h2 class="section-title">Nuestros Valores</h2>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">🧁</div>
+                <h3>Calidad</h3>
+                <p>Ingredientes frescos y de primera</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🎨</div>
+                <h3>Creatividad</h3>
+                <p>Innovación en sabores y diseños</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">❤️</div>
+                <h3>Pasión</h3>
+                <p>Elaborado con amor y dedicación</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🌱</div>
+                <h3>Responsabilidad</h3>
+                <p>Compromiso ambiental</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🤝</div>
+                <h3>Honestidad</h3>
+                <p>Servicio transparente</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">👩‍🍳</div>
+                <h3>Trabajo en Equipo</h3>
+                <p>Colaboración y respeto</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">✨</div>
+                <h3>Innovación</h3>
+                <p>Búsqueda de tendencias</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">😊</div>
+                <h3>Calidez</h3>
+                <p>Trato cercano y amable</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="productos">
+        <h2 class="section-title">Nuestros Productos</h2>
+        <div class="products-filter">
+            <button class="filter-btn active" onclick="filterProducts('all')">Todos</button>
+            <button class="filter-btn" onclick="filterProducts('clasicos')">Clásicos</button>
+            <button class="filter-btn" onclick="filterProducts('especiales')">Especiales</button>
+            <button class="filter-btn" onclick="filterProducts('tematicos')">Temáticos</button>
+        </div>
+        <div class="products-grid">
+            <div class="product-card" data-category="clasicos">
+                <div class="product-image" style="background: linear-gradient(135deg, #F5E6D3, #FFF8DC);">🧁</div>
+                <div class="product-info">
+                    <h3>Vainilla Tradicional</h3>
+                    <p>Esponjoso bizcocho con suave buttercream</p>
+                    <div class="product-price">Q15</div>
+                    <button class="order-btn" onclick="openOrderModal('Vainilla Tradicional')">Pedir Ahora</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="clasicos">
+                <div class="product-image" style="background: linear-gradient(135deg, #8B4513, #654321);">🍫</div>
+                <div class="product-info">
+                    <h3>Chocolate Intenso</h3>
+                    <p>Cacao puro con cobertura cremosa</p>
+                    <div class="product-price">Q15</div>
+                    <button class="order-btn" onclick="openOrderModal('Chocolate Intenso')">Pedir Ahora</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="clasicos">
+                <div class="product-image" style="background: linear-gradient(135deg, #DC143C, #8B0000);">❤️</div>
+                <div class="product-info">
+                    <h3>Red Velvet</h3>
+                    <p>Terciopelo rojo con frosting de queso crema</p>
+                    <div class="product-price">Q15</div>
+                    <button class="order-btn" onclick="openOrderModal('Red Velvet')">Pedir Ahora</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="clasicos">
+                <div class="product-image" style="background: linear-gradient(135deg, #FFB6C1, #FF69B4);">🌸</div>
+                <div class="product-info">
+                    <h3>Glaseado Rosa</h3>
+                    <p>Fresco y ligero con toque cítrico</p>
+                    <div class="product-price">Q15</div>
+                    <button class="order-btn" onclick="openOrderModal('Glaseado Rosa')">Pedir Ahora</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="especiales">
+                <div class="product-image" style="background: linear-gradient(135deg, #8B7355, #6F4E37);">☕</div>
+                <div class="product-info">
+                    <h3>Cappuccino</h3>
+                    <p>Café suave con toque de cacao</p>
+                    <div class="product-price">Q20</div>
+                    <button class="order-btn" onclick="openOrderModal('Cappuccino')">Pedir Ahora</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="especiales">
+                <div class="product-image" style="background: linear-gradient(135deg, #FF6B9D, #FFB6C1);">🍓</div>
+                <div class="product-info">
+                    <h3>Fresa con Crema</h3>
+                    <p>Frescura natural con toque dulce</p>
+                    <div class="product-price">Q20</div>
+                    <button class="order-btn" onclick="openOrderModal('Fresa con Crema')">Pedir Ahora</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="tematicos">
+                <div class="product-image" style="background: linear-gradient(135deg, #FFD700, #FFA500);">🎉</div>
+                <div class="product-info">
+                    <h3>Cupcakes Temáticos</h3>
+                    <p>Diseños personalizados para cumpleaños, bodas, baby showers</p>
+                    <div class="product-price">Desde Q25</div>
+                    <button class="order-btn" onclick="openOrderModal('Cupcakes Temáticos')">Pedir Ahora</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="especiales">
+                <div class="product-image" style="background: linear-gradient(135deg, #FFE5B4, #D2691E);">🍯</div>
+                <div class="product-info">
+                    <h3>Dulce de Leche</h3>
+                    <p>Bizcocho suave relleno con dulce de leche argentino</p>
+                    <div class="product-price">Q20</div>
+                    <button class="order-btn" onclick="openOrderModal('Dulce de Leche')">Pedir Ahora</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="especiales">
+                <div class="product-image" style="background: linear-gradient(135deg, #98FB98, #32CD32);">🍋</div>
+                <div class="product-info">
+                    <h3>Limón Merengue</h3>
+                    <p>Refrescante limón con suave merengue italiano</p>
+                    <div class="product-price">Q20</div>
+                    <button class="order-btn" onclick="openOrderModal('Limón Merengue')">Pedir Ahora</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="especiales">
+                <div class="product-image" style="background: linear-gradient(135deg, #DDA0DD, #9370DB);">🫐</div>
+                <div class="product-info">
+                    <h3>Arándanos con Crema</h3>
+                    <p>Delicioso cupcake con arándanos frescos y crema batida</p>
+                    <div class="product-price">Q22</div>
+                    <button class="order-btn" onclick="openOrderModal('Arándanos con Crema')">Pedir Ahora</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="clasicos">
+                <div class="product-image" style="background: linear-gradient(135deg, #F4A460, #CD853F);">🧈</div>
+                <div class="product-info">
+                    <h3>Caramelo Salado</h3>
+                    <p>Vainilla con cobertura de caramelo y toque de sal marina</p>
+                    <div class="product-price">Q18</div>
+                    <button class="order-btn" onclick="openOrderModal('Caramelo Salado')">Pedir Ahora</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="especiales">
+                <div class="product-image" style="background: linear-gradient(135deg, #FFE4E1, #FF1493);">🍰</div>
+                <div class="product-info">
+                    <h3>Cheesecake de Fresa</h3>
+                    <p>Base de galleta con cheesecake y mermelada de fresa</p>
+                    <div class="product-price">Q25</div>
+                    <button class="order-btn" onclick="openOrderModal('Cheesecake de Fresa')">Pedir Ahora</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="especiales">
+                <div class="product-image" style="background: linear-gradient(135deg, #8B4513, #F5DEB3);">🥜</div>
+                <div class="product-info">
+                    <h3>Mantequilla de Maní</h3>
+                    <p>Chocolate con relleno cremoso de mantequilla de maní</p>
+                    <div class="product-price">Q22</div>
+                    <button class="order-btn" onclick="openOrderModal('Mantequilla de Maní')">Pedir Ahora</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="especiales">
+                <div class="product-image" style="background: linear-gradient(135deg, #F0E68C, #FFD700);">🥥</div>
+                <div class="product-info">
+                    <h3>Coco y Piña Colada</h3>
+                    <p>Tropical mezcla de coco rallado y piña fresca</p>
+                    <div class="product-price">Q23</div>
+                    <button class="order-btn" onclick="openOrderModal('Coco y Piña Colada')">Pedir Ahora</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="tematicos">
+                <div class="product-image" style="background: linear-gradient(135deg, #FF6347, #DC143C);">🌹</div>
+                <div class="product-info">
+                    <h3>Red Velvet Premium</h3>
+                    <p>Edición especial con decoración de rosas comestibles</p>
+                    <div class="product-price">Q28</div>
+                    <button class="order-btn" onclick="openOrderModal('Red Velvet Premium')">Pedir Ahora</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="especiales">
+                <div class="product-image" style="background: linear-gradient(135deg, #E6E6FA, #9370DB);">🍇</div>
+                <div class="product-info">
+                    <h3>Lavanda y Miel</h3>
+                    <p>Elegante combinación floral con miel natural</p>
+                    <div class="product-price">Q24</div>
+                    <button class="order-btn" onclick="openOrderModal('Lavanda y Miel')">Pedir Ahora</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="tematicos">
+                <div class="product-image" style="background: linear-gradient(135deg, #FFA07A, #FF4500);">🎃</div>
+                <div class="product-info">
+                    <h3>Calabaza Especiada</h3>
+                    <p>Temporada: Especias de otoño con calabaza fresca</p>
+                    <div class="product-price">Q26</div>
+                    <button class="order-btn" onclick="openOrderModal('Calabaza Especiada')">Pedir Ahora</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="clasicos">
+                <div class="product-image" style="background: linear-gradient(135deg, #F5F5DC, #8B4513);">🍪</div>
+                <div class="product-info">
+                    <h3>Cookies & Cream</h3>
+                    <p>Vainilla con trozos de galletas Oreo trituradas</p>
+                    <div class="product-price">Q18</div>
+                    <button class="order-btn" onclick="openOrderModal('Cookies & Cream')">Pedir Ahora</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="especiales">
+                <div class="product-image" style="background: linear-gradient(135deg, #FFDAB9, #CD853F);">🍑</div>
+                <div class="product-info">
+                    <h3>Durazno y Crema</h3>
+                    <p>Suave bizcocho con duraznos en almíbar y crema</p>
+                    <div class="product-price">Q21</div>
+                    <button class="order-btn" onclick="openOrderModal('Durazno y Crema')">Pedir Ahora</button>
+                </div>
+            </div>
+            <div class="product-card" data-category="tematicos">
+                <div class="product-image" style="background: linear-gradient(135deg, #87CEEB, #4169E1);">❄️</div>
+                <div class="product-info">
+                    <h3>Frozen Wonderland</h3>
+                    <p>Temático invernal con decoración de copos de nieve</p>
+                    <div class="product-price">Q30</div>
+                    <button class="order-btn" onclick="openOrderModal('Frozen Wonderland')">Pedir Ahora</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nueva Sección: Documentación Empresarial -->
+    <section id="documentacion">
+        <h2 class="section-title">Documentación Empresarial</h2>
+        <p style="text-align: center; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+            Toda la documentación legal y administrativa necesaria para el funcionamiento de nuestra empresa.
+        </p>
+        
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>📋 Registro Mercantil Completo</span>
+                <span>+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="document-section">
+                    <h4>📄 Patente de Comercio</h4>
+                    <p><strong>Descripción:</strong> Documento oficial que acredita la inscripción de Yesenia's Cupcake en el Registro Mercantil de Guatemala.</p>
+                    <p><strong>Vigencia:</strong> Permanente mientras la empresa esté activa</p>
+                </div>
+
+                <div class="document-section">
+                    <h4>🏷️ Requisitos de Inscripción de Marca</h4>
+                    <ul>
+                        <li>Formulario de solicitud de registro de marca completado</li>
+                        <li>Comprobante de pago de tasas registrales</li>
+                        <li>Representación gráfica de la marca (logo)</li>
+                        <li>Descripción detallada de productos y servicios</li>
+                        <li>Poder de representación legal (si aplica)</li>
+                        <li>Clasificación internacional de Niza para productos alimenticios</li>
+                    </ul>
+                </div>
+
+                <div class="document-section">
+                    <h4>📚 Autorización de Libros de Contabilidad</h4>
+                    <p>Libros contables autorizados por el Registro Mercantil:</p>
+                    <ul>
+                        <li>Libro de Inventarios</li>
+                        <li>Libro Diario</li>
+                        <li>Libro Mayor</li>
+                        <li>Libro de Estados Financieros</li>
+                    </ul>
+                    <p><strong>Nota:</strong> Todos los libros deben estar habilitados antes de iniciar operaciones.</p>
+                </div>
+
+                <div class="document-section">
+                    <h4>📋 Formulario de Inscripción</h4>
+                    <p>Formulario oficial del Registro Mercantil debidamente completado con:</p>
+                    <ul>
+                        <li>Datos generales de la empresa</li>
+                        <li>Información del representante legal</li>
+                        <li>Actividad económica principal: Elaboración de productos de panadería y repostería</li>
+                        <li>Dirección del establecimiento comercial</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>💼 Documentación SAT Completa</span>
+                <span>+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="document-section">
+                    <h4>📋 Requisitos de Inscripción en SAT</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Documento</th>
+                                <th>Descripción Detallada</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>📄 DPI</td>
+                                <td>Documento Personal de Identificación vigente, escaneado por ambos lados en formato PDF o JPG. Debe estar legible y sin alteraciones.</td>
+                            </tr>
+                            <tr>
+                                <td>🛂 Pasaporte</td>
+                                <td>Para extranjeros: Pasaporte vigente con visa de residencia o permiso de trabajo en Guatemala.</td>
+                            </tr>
+                            <tr>
+                                <td>💡 Factura de Servicios</td>
+                                <td>Recibo de energía eléctrica, agua potable, teléfono fijo o internet residencial. No mayor a 3 meses de emisión. Debe coincidir con la dirección fiscal declarada.</td>
+                            </tr>
+                            <tr>
+                                <td>🏘️ Recibo de IUSI</td>
+                                <td>Impuesto Único Sobre Inmuebles. No mayor a 3 meses o del año en curso si el pago es anual, semestral o trimestral.</td>
+                            </tr>
+                            <tr>
+                                <td>🏪 Patente de Comercio</td>
+                                <td>Copia de la patente de comercio inscrita en el Registro Mercantil. Aplica para domicilio comercial.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="document-section">
+                    <h4>📝 Pasos para la Inscripción</h4>
+                    <ol>
+                        <li>Escanear y adjuntar todos los requisitos a la solicitud en línea</li>
+                        <li>Presentar los documentos originales en Oficina o Agencia Tributaria al concluir la gestión</li>
+                        <li>La solicitud debe realizarla personalmente el representante legal</li>
+                        <li>Esperar la asignación del número de RTU (Registro Tributario Unificado)</li>
+                        <li>Recibir notificación de inscripción exitosa</li>
+                    </ol>
+                </div>
+
+                <div class="document-section">
+                    <h4>🧾 Facturación Electrónica (FEL)</h4>
+                    <p><strong>Sistema implementado:</strong> Portal SAT Agencia Virtual</p>
+                    <ul>
+                        <li>Certificado de Firma Electrónica (e-Firma) activo</li>
+                        <li>Software de facturación certificado por SAT</li>
+                        <li>Conexión a internet para transmisión de documentos</li>
+                        <li>Capacitación en el uso del sistema FEL</li>
+                    </ul>
+                    <p><strong>Tipos de documentos autorizados:</strong></p>
+                    <ul>
+                        <li>Factura Electrónica (FACT)</li>
+                        <li>Nota de Crédito Electrónica (NCRE)</li>
+                        <li>Nota de Débito Electrónica (NDEB)</li>
+                    </ul>
+                </div>
+
+                <div class="document-section">
+                    <h4>🆔 RTU - Registro Tributario Unificado</h4>
+                    <p><strong>Número de RTU:</strong> [Asignado por SAT tras inscripción]</p>
+                    <p><strong>Características del RTU:</strong></p>
+                    <ul>
+                        <li>Número único e intransferible para identificación tributaria</li>
+                        <li>Válido para todos los regímenes tributarios en Guatemala</li>
+                        <li>Obligatorio para emisión de facturas y documentos fiscales</li>
+                        <li>Necesario para importaciones y exportaciones</li>
+                        <li>Requerido en trámites bancarios y comerciales</li>
+                    </ul>
+                    <p><strong>Régimen Tributario:</strong> Régimen Sobre las Utilidades de Actividades Lucrativas (ISR) - Opcional Simplificado sobre Ingresos de Actividades Lucrativas</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>👨‍💼 Registro del Perito Contador</span>
+                <span>+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="document-section">
+                    <h4>📋 Requisitos del Perito Contador</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Requisito</th>
+                                <th>Detalle Completo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>📜 Antecedentes Penales</td>
+                                <td>Constancia original de carencia de antecedentes penales, extendida por el Ministerio Público o Organismo Judicial. No mayor a 6 meses de emisión. Debe indicar que no ha sido condenado por delitos contra la fe pública o el patrimonio.</td>
+                            </tr>
+                            <tr>
+                                <td>🎓 Título Universitario</td>
+                                <td>Título original de Perito Contador o Contador Público y Auditor, extendido por universidad reconocida en Guatemala. Fotocopia legalizada por Notario, no mayor a 3 meses de su legalización.</td>
+                            </tr>
+                            <tr>
+                                <td>📍 Comprobante de Domicilio</td>
+                                <td>Factura de servicios públicos (luz, agua, teléfono) o recibo de IUSI, no mayor a 3 meses. Este requisito no aplica si la prestación de servicios es independiente (sin oficina física).</td>
+                            </tr>
+                            <tr>
+                                <td>💼 Colegiado Activo</td>
+                                <td>Constancia de colegiado activo del Colegio de Contadores Públicos y Auditores de Guatemala (CCPAG).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="document-section">
+                    <h4>📝 Responsabilidades del Perito Contador</h4>
+                    <ul>
+                        <li>Llevar la contabilidad completa de la empresa conforme a principios de contabilidad generalmente aceptados</li>
+                        <li>Elaborar estados financieros mensuales y anuales</li>
+                        <li>Presentar declaraciones tributarias ante SAT (IVA, ISR, etc.)</li>
+                        <li>Mantener actualizados los libros contables autorizados</li>
+                        <li>Asesorar en temas fiscales y contables</li>
+                        <li>Firmar y sellar todos los documentos contables oficiales</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>🏖️ IRTRA - Documentación e Inscripción</span>
+                <span>+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="document-section">
+                    <h4>📋 Requisitos de Inscripción Patronal</h4>
+                    <ul>
+                        <li>Formulario de inscripción patronal debidamente completado y firmado</li>
+                        <li>Fotocopia de Patente de Comercio o Patente de Sociedad</li>
+                        <li>Fotocopia del RTU (Registro Tributario Unificado)</li>
+                        <li>Fotocopia del DPI del representante legal</li>
+                        <li>Listado completo de trabajadores con los siguientes datos:
+                            <ul>
+                                <li>Nombre completo</li>
+                                <li>Número de DPI</li>
+                                <li>Puesto de trabajo</li>
+                                <li>Salario mensual</li>
+                                <li>Fecha de ingreso</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="document-section">
+                    <h4>💰 Información sobre Aportes</h4>
+                    <p><strong>Aporte Patronal Obligatorio:</strong> 1% sobre el total de salarios ordinarios y extraordinarios pagados mensualmente a los trabajadores.</p>
+                    <p><strong>Base de cálculo:</strong> Todos los salarios incluyendo bonificaciones, comisiones y horas extras.</p>
+                    <p><strong>Plazo de pago:</strong> Dentro de los primeros 10 días hábiles del mes siguiente.</p>
+                </div>
+
+                <div class="document-section">
+                    <h4>🎯 Beneficios para los Trabajadores</h4>
+                    <ul>
+                        <li>Acceso a parques recreativos IRTRA (Petapa, Retalhuleu, Agua Caliente)</li>
+                        <li>Descuentos en hospedaje y alimentación</li>
+                        <li>Programas educativos y culturales</li>
+                        <li>Eventos deportivos y recreativos</li>
+                        <li>Beneficios extensivos a familiares directos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="legal">
+        <h2 class="section-title">Reglamento Interno de Trabajo</h2>
+        
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>📖 Capítulo I - Disposiciones Generales</span>
+                <span>+</span>
+            </div>
+            <div class="accordion-content">
+                <ol>
+                    <li>Este reglamento regula las relaciones laborales entre la empresa y sus trabajadores.</li>
+                    <li>Para poder ser contratado, el trabajador debe ser mayor de 18 años y reunir las condiciones que la empresa requiera.</li>
+                    <li>El cumplimiento de este reglamento es obligatorio para todos los trabajadores.</li>
+                    <li>⏰ El horario de trabajo será de lunes a viernes, de 8:00 a.m. a 4:00 p.m., con una hora de almuerzo de 1:00 p.m. a 2:00 p.m.</li>
+                    <li>Durante la jornada laboral, no está permitido comer fuera del horario de almuerzo.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>⏱️ Capítulo II - Asistencia y Puntualidad</span>
+                <span>+</span>
+            </div>
+            <div class="accordion-content">
+                <ol>
+                    <li>Todos los trabajadores deberán presentarse puntualmente en el horario establecido.</li>
+                    <li>La asistencia se llevará mediante el registro oficial de la empresa (libro o sistema electrónico).</li>
+                    <li>Las ausencias deberán justificarse oportunamente; de lo contrario, se considerarán injustificadas.</li>
+                    <li>Tres retardos injustificados equivaldrán a una falta.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>💼 Capítulo III - Cumplimiento de Labores</span>
+                <span>+</span>
+            </div>
+            <div class="accordion-content">
+                <ol>
+                    <li>Cada trabajador está obligado a cumplir con sus funciones con responsabilidad, eficiencia y respeto.</li>
+                    <li>Queda prohibido:
+                        <ul>
+                            <li>Generar conflictos o discusiones con los compañeros de trabajo</li>
+                            <li>Mantener relaciones amorosas entre trabajadores dentro de la empresa</li>
+                            <li>Tomar herramientas, productos o pertenencias de la empresa que no le correspondan</li>
+                        </ul>
+                    </li>
+                    <li>Todo trabajador debe cumplir con las órdenes e instrucciones relacionadas con su puesto.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>⚖️ Capítulo IV - Derechos y Deberes de los Trabajadores</span>
+                <span>+</span>
+            </div>
+            <div class="accordion-content">
+                <h4 style="color: var(--rosa-fuerte);">✅ Derechos:</h4>
+                <ol>
+                    <li>Recibir su salario puntualmente conforme a lo establecido en la ley</li>
+                    <li>Gozar de vacaciones, descansos y prestaciones según el Código de Trabajo</li>
+                    <li>Trabajar en condiciones de higiene y seguridad adecuadas</li>
+                    <li>Ser tratado con respeto y dignidad</li>
+                </ol>
+                <h4 style="color: var(--rosa-fuerte); margin-top: 1rem;">📌 Deberes:</h4>
+                <ol>
+                    <li>Cumplir con el horario establecido y registrar su asistencia</li>
+                    <li>Respetar a compañeros y superiores</li>
+                    <li>Hacer uso correcto de los recursos, equipos, herramientas y uniformes de la empresa</li>
+                    <li>Reportar cualquier irregularidad, accidente o situación que afecte el buen desarrollo de las labores</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>🛠️ Capítulo V - Uso de Equipo, Herramientas y Uniformes</span>
+                <span>+</span>
+            </div>
+            <div class="accordion-content">
+                <ol>
+                    <li>Todo trabajador deberá utilizar adecuadamente los equipos, herramientas y uniformes que le sean proporcionados.</li>
+                    <li>Es obligación mantenerlos en buen estado y usarlos únicamente para fines laborales.</li>
+                    <li>En caso de daño por negligencia, el trabajador asumirá la responsabilidad correspondiente.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>🚫 Capítulo VI - Prohibiciones</span>
+                <span>+</span>
+            </div>
+            <div class="accordion-content">
+                <p style="margin-bottom: 1rem;">Queda estrictamente prohibido a los trabajadores:</p>
+                <ol>
+                    <li>Ingerir bebidas alcohólicas o drogas dentro del centro de trabajo, o presentarse bajo sus efectos</li>
+                    <li>Faltar al trabajo sin justificación</li>
+                    <li>Usar bienes de la empresa para fines personales sin autorización</li>
+                    <li>Alterar, dañar o destruir documentos, equipo o materiales de la empresa</li>
+                    <li>Dormir durante la jornada laboral</li>
+                    <li>Incurrir en conductas ofensivas, irrespetuosas o contrarias a la buena convivencia</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>🏥 Capítulo VII - Higiene y Seguridad</span>
+                <span>+</span>
+            </div>
+            <div class="accordion-content">
+                <ol>
+                    <li>La empresa se compromete a proporcionar condiciones adecuadas de higiene y seguridad.</li>
+                    <li>Los trabajadores deberán:
+                        <ul>
+                            <li>Usar equipo de protección personal cuando sea requerido</li>
+                            <li>Mantener limpio y ordenado el lugar de trabajo</li>
+                            <li>Reportar inmediatamente cualquier accidente o situación de riesgo</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>📋 Capítulo VIII - Disposiciones Finales</span>
+                <span>+</span>
+            </div>
+            <div class="accordion-content">
+                <ol>
+                    <li>Lo no previsto en este reglamento se resolverá conforme al <strong>Código de Trabajo de Guatemala</strong>.</li>
+                    <li>Este reglamento entrará en vigencia a partir de su aprobación por el <strong>Ministerio de Trabajo y Previsión Social</strong>.</li>
+                    <li>Cualquier modificación al reglamento deberá ser notificada a los trabajadores con 15 días de anticipación.</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section id="equipo">
+        <h2 class="section-title">Nuestro Equipo</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-avatar">👩‍🍳</div>
+                <div class="team-info">
+                    <h3>Melanie Yesenia Pérez Osoy</h3>
+                    <span class="team-badge">Empleado 1</span>
+                    <p style="margin-top: 0.5rem;">Maestra Pastelera y Fundadora</p>
+                    <p style="font-size: 0.9rem; color: #666;">Especialista en repostería artesanal y diseño de cupcakes</p>
+                    <div class="team-buttons">
+                        <button class="doc-btn" onclick="showDocument('emp1', 'dpi')">📄 Ver DPI</button>
+                        <button class="doc-btn" onclick="showDocument('emp1', 'cv')">📋 Ver CV</button>
+                        <button class="doc-btn" onclick="showDocument('emp1', 'contrato')">📝 Contrato</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-avatar">👨‍🍳</div>
+                <div class="team-info">
+                    <h3>María González López</h3>
+                    <span class="team-badge">Empleado 2</span>
+                    <p style="margin-top: 0.5rem;">Chef Pastelera Senior</p>
+                    <p style="font-size: 0.9rem; color: #666;">Experta en decoración y técnicas de glaseado</p>
+                    <div class="team-buttons">
+                        <button class="doc-btn" onclick="showDocument('emp2', 'dpi')">📄 Ver DPI</button>
+                        <button class="doc-btn" onclick="showDocument('emp2', 'cv')">📋 Ver CV</button>
+                        <button class="doc-btn" onclick="showDocument('emp2', 'contrato')">📝 Contrato</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-avatar">👩‍💼</div>
+                <div class="team-info">
+                    <h3>Ana Martínez Rodríguez</h3>
+                    <span class="team-badge">Empleado 3</span>
+                    <p style="margin-top: 0.5rem;">Gerente de Atención al Cliente</p>
+                    <p style="font-size: 0.9rem; color: #666;">Especialista en ventas y servicio personalizado</p>
+                    <div class="team-buttons">
+                        <button class="doc-btn" onclick="showDocument('emp3', 'dpi')">📄 Ver DPI</button>
+                        <button class="doc-btn" onclick="showDocument('emp3', 'cv')">📋 Ver CV</button>
+                        <button class="doc-btn" onclick="showDocument('emp3', 'contrato')">📝 Contrato</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-avatar">👨‍💼</div>
+                <div class="team-info">
+                    <h3>Carlos Hernández Castillo</h3>
+                    <span class="team-badge">Empleado 4</span>
+                    <p style="margin-top: 0.5rem;">Administrador y Logística</p>
+                    <p style="font-size: 0.9rem; color: #666;">Gestión de inventarios y proveedores</p>
+                    <div class="team-buttons">
+                        <button class="doc-btn" onclick="showDocument('emp4', 'dpi')">📄 Ver DPI</button>
+                        <button class="doc-btn" onclick="showDocument('emp4', 'cv')">📋 Ver CV</button>
+                        <button class="doc-btn" onclick="showDocument('emp4', 'contrato')">📝 Contrato</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-avatar">👩‍🔧</div>
+                <div class="team-info">
+                    <h3>Sofía Ramírez Torres</h3>
+                    <span class="team-badge">Empleado 5</span>
+                    <p style="margin-top: 0.5rem;">Producción y Control de Calidad</p>
+                    <p style="font-size: 0.9rem; color: #666;">Supervisión de procesos y estándares</p>
+                    <div class="team-buttons">
+                        <button class="doc-btn" onclick="showDocument('emp5', 'dpi')">📄 Ver DPI</button>
+                        <button class="doc-btn" onclick="showDocument('emp5', 'cv')">📋 Ver CV</button>
+                        <button class="doc-btn" onclick="showDocument('emp5', 'contrato')">📝 Contrato</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto">
+        <h2 class="section-title">Contáctanos</h2>
+        <div style="max-width: 600px; margin: 0 auto;">
+            <form class="contact-form" onsubmit="submitForm(event)">
+                <input type="text" placeholder="Nombre completo" required>
+                <input type="email" placeholder="Correo electrónico" required>
+                <input type="tel" placeholder="Teléfono">
+                <textarea rows="5" placeholder="Mensaje" required></textarea>
+                <button type="submit">Enviar Mensaje</button>
+            </form>
+            <div style="margin-top: 2rem; text-align: center;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247179.3654722469!2d-90.72693!3d14.628434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8589a3c7c2eaaac9%3A0x3fe040c94e2dd2ec!2sGuatemala%20City!5e0!3m2!1sen!2sgt!4v1234567890" width="100%" height="300" style="border:0; border-radius: 20px; margin-top: 2rem;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Yesenia's Cupcake</h3>
+                <p>Endulzando tus momentos especiales desde Guatemala</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">📸</a>
+                    <a href="#" class="social-link">🐦</a>
+                    <a href="#" class="social-link">📧</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Enlaces Rápidos</h3>
+                <ul style="list-style: none;">
+                    <li style="margin: 0.5rem 0;"><a href="#inicio" style="color: white; text-decoration: none;">Inicio</a></li>
+                    <li style="margin: 0.5rem 0;"><a href="#productos" style="color: white; text-decoration: none;">Productos</a></li>
+                    <li style="margin: 0.5rem 0;"><a href="#documentacion" style="color: white; text-decoration: none;">Documentación</a></li>
+                    <li style="margin: 0.5rem 0;"><a href="#equipo" style="color: white; text-decoration: none;">Equipo</a></li>
+                    <li style="margin: 0.5rem 0;"><a href="#contacto" style="color: white; text-decoration: none;">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Horario</h3>
+                <p>📅 Lunes a Viernes<br>🕐 8:00 AM - 4:00 PM<br>🍽️ Almuerzo: 1:00 PM - 2:00 PM</p>
+                <p style="margin-top: 1rem;">📍 Guatemala City, Guatemala</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Yesenia's Cupcake. Todos los derechos reservados.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Diseñado by Said_Oj_Fa  ❤️ 🧁 para endulzar tu experiencia</p>
+        </div>
+    </footer>
+
+    <!-- Modal para Pedidos -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('orderModal')">&times;</button>
+            <h2 style="color: var(--rosa-fuerte); margin-bottom: 1rem;">Realizar Pedido</h2>
+            <form class="contact-form" onsubmit="submitOrder(event)">
+                <input type="text" id="productName" readonly style="background: #f0f0f0; font-weight: 600;">
+                <input type="text" placeholder="Tu nombre completo" required>
+                <input type="tel" placeholder="Teléfono de contacto" required>
+                <input type="email" placeholder="Correo electrónico" required>
+                <input type="number" placeholder="Cantidad de cupcakes" min="1" required>
+                <input type="date" placeholder="Fecha de entrega" required>
+                <textarea rows="3" placeholder="Notas especiales o instrucciones de personalización (opcional)"></textarea>
+                <button type="submit">Confirmar Pedido 🧁</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para Documentos de Empleados -->
+    <div id="documentModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('documentModal')">&times;</button>
+            <div id="documentContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Mobile Menu
+        function toggleMenu() {
+            document.getElementById('menu').classList.toggle('active');
+        }
+
+        function closeMenu() {
+            document.getElementById('menu').classList.remove('active');
+        }
+
+        // Accordion
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('span:last-child');
+            
+            content.classList.toggle('active');
+            icon.textContent = content.classList.contains('active') ? '-' : '+';
+        }
+
+        // Product Filter
+        function filterProducts(category) {
+            const products = document.querySelectorAll('.product-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            products.forEach(product => {
+                if (category === 'all' || product.dataset.category === category) {
+                    product.style.display = 'block';
+                    setTimeout(() => product.style.opacity = '1', 10);
+                } else {
+                    product.style.opacity = '0';
+                    setTimeout(() => product.style.display = 'none', 300);
+                }
+            });
+        }
+
+        // Modal para Pedidos
+        function openOrderModal(productName) {
+            document.getElementById('productName').value = productName;
+            document.getElementById('orderModal').classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Data de Empleados
+        const empleadosData = {
+            emp1: {
+                nombre: 'Melanie Yesenia Pérez Osoy',
+                dpi: {
+                    numero: '2567 89012 3456',
+                    departamento: 'Guatemala',
+                    municipio: 'Guatemala',
+                    fechaNacimiento: '15/03/1995',
+                    direccion: 'Zona 1, Ciudad de Guatemala'
+                },
+                cv: {
+                    educacion: [
+                        'Técnico en Repostería y Panadería - Instituto Técnico Vocacional (2013)',
+                        'Diplomado en Pastelería Francesa - Academia Culinaria (2015)',
+                        'Curso de Decoración Avanzada de Cupcakes - International Baking School (2017)'
+                    ],
+                    experiencia: [
+                        'Fundadora y Chef Principal - Yesenia\'s Cupcake (2020 - Presente)',
+                        'Chef Pastelera - Dulce Tentación Bakery (2017-2020)',
+                        'Asistente de Repostería - La Panadería Gourmet (2015-2017)'
+                    ],
+                    habilidades: [
+                        'Especialización en técnicas de buttercream y fondant',
+                        'Diseño y decoración de cupcakes temáticos',
+                        'Gestión de producción y control de calidad',
+                        'Desarrollo de recetas únicas y sabores innovadores',
+                        'Manejo de equipos de cocina profesional'
+                    ]
+                },
+                contrato: {
+                    tipo: 'Contrato por Tiempo Indefinido',
+                    puesto: 'Gerente General y Chef Principal',
+                    salario: 'Q6,500.00 mensuales',
+                    fechaInicio: '01/01/2020',
+                    jornada: 'Lunes a Viernes, 8:00 AM - 4:00 PM',
+                    prestaciones: 'Aguinaldo, Bono 14, Vacaciones, IGSS, IRTRA'
+                }
+            },
+            emp2: {
+                nombre: 'María González López',
+                dpi: {
+                    numero: '1892 45678 9012',
+                    departamento: 'Guatemala',
+                    municipio: 'Mixco',
+                    fechaNacimiento: '22/07/1990',
+                    direccion: 'Zona 6 de Mixco, Guatemala'
+                },
+                cv: {
+                    educacion: [
+                        'Perito en Gastronomía - Escuela Nacional Central de Agricultura (2009)',
+                        'Curso de Pastelería Profesional - INTECAP (2011)',
+                        'Certificación en Decoración de Pasteles - Wilton Method (2014)'
+                    ],
+                    experiencia: [
+                        'Chef Pastelera Senior - Yesenia\'s Cupcake (2021 - Presente)',
+                        'Jefa de Producción - Sweet Dreams Bakery (2015-2021)',
+                        'Pastelera - Panadería San Martín (2011-2015)'
+                    ],
+                    habilidades: [
+                        'Experta en técnicas de glaseado y decoración',
+                        'Manejo de horno industrial y batidoras profesionales',
+                        'Elaboración de rellenos y coberturas especiales',
+                        'Control de tiempos y temperaturas de horneado',
+                        'Trabajo en equipo y capacitación de personal'
+                    ]
+                },
+                contrato: {
+                    tipo: 'Contrato por Tiempo Indefinido',
+                    puesto: 'Chef Pastelera Senior',
+                    salario: 'Q4,500.00 mensuales',
+                    fechaInicio: '15/03/2021',
+                    jornada: 'Lunes a Viernes, 8:00 AM - 4:00 PM',
+                    prestaciones: 'Aguinaldo, Bono 14, Vacaciones, IGSS, IRTRA'
+                }
+            },
+            emp3: {
+                nombre: 'Ana Martínez Rodríguez',
+                dpi: {
+                    numero: '3245 67890 1234',
+                    departamento: 'Guatemala',
+                    municipio: 'Villa Nueva',
+                    fechaNacimiento: '10/11/1993',
+                    direccion: 'Zona 4, Villa Nueva, Guatemala'
+                },
+                cv: {
+                    educacion: [
+                        'Bachiller en Ciencias y Letras con Orientación en Computación (2011)',
+                        'Técnico en Ventas y Servicio al Cliente - INTECAP (2013)',
+                        'Diplomado en Marketing Digital - Universidad Galileo (2019)'
+                    ],
+                    experiencia: [
+                        'Gerente de Atención al Cliente - Yesenia\'s Cupcake (2020 - Presente)',
+                        'Ejecutiva de Ventas - Pastelería Delicias (2016-2020)',
+                        'Asistente de Ventas - Supermercados La Torre (2013-2016)'
+                    ],
+                    habilidades: [
+                        'Excelente servicio al cliente y comunicación',
+                        'Gestión de pedidos y seguimiento',
+                        'Manejo de redes sociales y marketing',
+                        'Resolución de problemas y atención de quejas',
+                        'Coordinación de entregas y logística'
+                    ]
+                },
+                contrato: {
+                    tipo: 'Contrato por Tiempo Indefinido',
+                    puesto: 'Gerente de Atención al Cliente',
+                    salario: 'Q3,800.00 mensuales',
+                    fechaInicio: '01/06/2020',
+                    jornada: 'Lunes a Viernes, 8:00 AM - 4:00 PM',
+                    prestaciones: 'Aguinaldo, Bono 14, Vacaciones, IGSS, IRTRA'
+                }
+            },
+            emp4: {
+                nombre: 'Carlos Hernández Castillo',
+                dpi: {
+                    numero: '2789 01234 5678',
+                    departamento: 'Guatemala',
+                    municipio: 'San Miguel Petapa',
+                    fechaNacimiento: '05/04/1988',
+                    direccion: 'Zona 2, San Miguel Petapa, Guatemala'
+                },
+                cv: {
+                    educacion: [
+                        'Perito Contador - Instituto Comercial (2006)',
+                        'Curso de Administración de Empresas - INTECAP (2010)',
+                        'Diplomado en Gestión de Inventarios - USAC (2015)'
+                    ],
+                    experiencia: [
+                        'Administrador - Yesenia\'s Cupcake (2020 - Presente)',
+                        'Asistente Administrativo - Distribuidora Alimenticia (2014-2020)',
+                        'Auxiliar Contable - Comercial Pérez (2008-2014)'
+                    ],
+                    habilidades: [
+                        'Gestión de inventarios y compras',
+                        'Control de costos y presupuestos',
+                        'Negociación con proveedores',
+                        'Manejo de software contable',
+                        'Coordinación logística y entregas'
+                    ]
+                },
+                contrato: {
+                    tipo: 'Contrato por Tiempo Indefinido',
+                    puesto: 'Administrador y Encargado de Logística',
+                    salario: 'Q4,200.00 mensuales',
+                    fechaInicio: '15/02/2020',
+                    jornada: 'Lunes a Viernes, 8:00 AM - 4:00 PM',
+                    prestaciones: 'Aguinaldo, Bono 14, Vacaciones, IGSS, IRTRA'
+                }
+            },
+            emp5: {
+                nombre: 'Sofía Ramírez Torres',
+                dpi: {
+                    numero: '1956 78901 2345',
+                    departamento: 'Guatemala',
+                    municipio: 'Amatitlán',
+                    fechaNacimiento: '18/09/1992',
+                    direccion: 'Zona 3, Amatitlán, Guatemala'
+                },
+                cv: {
+                    educacion: [
+                        'Perito en Agroindustria Alimentaria - Escuela Técnica (2010)',
+                        'Técnico en Control de Calidad Alimentaria - INTECAP (2012)',
+                        'Curso de Buenas Prácticas de Manufactura - MSPAS (2016)'
+                    ],
+                    experiencia: [
+                        'Supervisora de Producción y Calidad - Yesenia\'s Cupcake (2021 - Presente)',
+                        'Técnica de Control de Calidad - Industrias Alimenticias (2015-2021)',
+                        'Asistente de Producción - Fábrica de Pan (2012-2015)'
+                    ],
+                    habilidades: [
+                        'Implementación de BPM y normas de higiene',
+                        'Control de calidad y supervisión de procesos',
+                        'Verificación de medidas sanitarias',
+                        'Optimización de tiempos de producción',
+                        'Capacitación en manipulación de alimentos'
+                    ]
+                },
+                contrato: {
+                    tipo: 'Contrato por Tiempo Indefinido',
+                    puesto: 'Supervisora de Producción y Control de Calidad',
+                    salario: 'Q4,000.00 mensuales',
+                    fechaInicio: '01/04/2021',
+                    jornada: 'Lunes a Viernes, 8:00 AM - 4:00 PM',
+                    prestaciones: 'Aguinaldo, Bono 14, Vacaciones, IGSS, IRTRA'
+                }
+            }
+        };
+
+        // Función para mostrar documentos
+        function showDocument(empleadoId, docType) {
+            const empleado = empleadosData[empleadoId];
+            let content = '';
+
+            if (docType === 'dpi') {
+                content = `
+                    <h2 style="color: var(--rosa-fuerte); margin-bottom: 1.5rem;">📄 Documento Personal de Identificación</h2>
+                    <div class="document-section">
+                        <h3 style="color: var(--chocolate); margin-bottom: 1rem;">${empleado.nombre}</h3>
+                        <table style="margin-top: 1rem;">
+                            <tr>
+                                <td style="font-weight: 600; width: 40%;">Número de DPI:</td>
+                                <td>${empleado.dpi.numero}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 600;">Fecha de Nacimiento:</td>
+                                <td>${empleado.dpi.fechaNacimiento}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 600;">Departamento:</td>
+                                <td>${empleado.dpi.departamento}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 600;">Municipio:</td>
+                                <td>${empleado.dpi.municipio}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 600;">Dirección:</td>
+                                <td>${empleado.dpi.direccion}</td>
+                            </tr>
+                        </table>
+                        <div style="background: var(--rosa-pastel); padding: 1rem; border-radius: 10px; margin-top: 1.5rem; text-align: center;">
+                            <p style="font-size: 0.9rem; margin: 0;">✅ Documento verificado y vigente</p>
+                        </div>
+                    </div>
+                `;
+            } else if (docType === 'cv') {
+                content = `
+                    <h2 style="color: var(--rosa-fuerte); margin-bottom: 1.5rem;">📋 Currículum Vitae</h2>
+                    <div class="document-section">
+                        <h3 style="color: var(--chocolate); margin-bottom: 1rem;">${empleado.nombre}</h3>
+                        
+                        <h4 style="color: var(--rosa-fuerte); margin-top: 1.5rem; margin-bottom: 0.5rem;">🎓 Educación</h4>
+                        <ul style="margin-left: 1.5rem;">
+                            ${empleado.cv.educacion.map(edu => `<li style="margin: 0.5rem 0;">${edu}</li>`).join('')}
+                        </ul>
+                        
+                        <h4 style="color: var(--rosa-fuerte); margin-top: 1.5rem; margin-bottom: 0.5rem;">💼 Experiencia Laboral</h4>
+                        <ul style="margin-left: 1.5rem;">
+                            ${empleado.cv.experiencia.map(exp => `<li style="margin: 0.5rem 0;">${exp}</li>`).join('')}
+                        </ul>
+                        
+                        <h4 style="color: var(--rosa-fuerte); margin-top: 1.5rem; margin-bottom: 0.5rem;">⭐ Habilidades y Competencias</h4>
+                        <ul style="margin-left: 1.5rem;">
+                            ${empleado.cv.habilidades.map(hab => `<li style="margin: 0.5rem 0;">${hab}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            } else if (docType === 'contrato') {
+                content = `
+                    <h2 style="color: var(--rosa-fuerte); margin-bottom: 1.5rem;">📝 Contrato de Trabajo</h2>
+                    <div class="document-section">
+                        <h3 style="color: var(--chocolate); text-align: center; margin-bottom: 1rem;">YESENIA'S CUPCAKE</h3>
+                        <p style="text-align: center; font-weight: 600; margin-bottom: 1.5rem;">CONTRATO INDIVIDUAL DE TRABAJO</p>
+                        
+                        <p style="margin-bottom: 1rem;"><strong>EMPLEADO:</strong> ${empleado.nombre}</p>
+                        
+                        <table style="margin-top: 1rem;">
+                            <tr>
+                                <td style="font-weight: 600; width: 40%;">Tipo de Contrato:</td>
+                                <td>${empleado.contrato.tipo}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 600;">Puesto:</td>
+                                <td>${empleado.contrato.puesto}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 600;">Salario:</td>
+                                <td>${empleado.contrato.salario}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 600;">Fecha de Inicio:</td>
+                                <td>${empleado.contrato.fechaInicio}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 600;">Jornada Laboral:</td>
+                                <td>${empleado.contrato.jornada}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 600;">Prestaciones:</td>
+                                <td>${empleado.contrato.prestaciones}</td>
+                            </tr>
+                        </table>
+                        
+                        <div style="margin-top: 2rem; padding: 1rem; background: #f9f9f9; border-radius: 10px;">
+                            <h4 style="color: var(--chocolate); margin-bottom: 0.5rem;">Cláusulas Principales:</h4>
+                            <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                                <li>El trabajador se obliga a desempeñar sus labores con eficiencia y esmero</li>
+                                <li>Cumplir con el horario establecido y el reglamento interno</li>
+                                <li>La empresa se compromete a pagar el salario puntualmente</li>
+                                <li>Proporcionar condiciones adecuadas de trabajo y seguridad</li>
+                                <li>Cumplir con todas las prestaciones de ley</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; text-align: center;">
+                            <div>
+                                <div style="border-top: 2px solid #333; padding-top: 0.5rem; margin-top: 3rem;">
+                                    <strong>Empleado</strong><br>
+                                    ${empleado.nombre}
+                                </div>
+                            </div>
+                            <div>
+                                <div style="border-top: 2px solid #333; padding-top: 0.5rem; margin-top: 3rem;">
+                                    <strong>Empleador</strong><br>
+                                    Yesenia's Cupcake
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p style="text-align: center; margin-top: 2rem; font-size: 0.9rem; color: #666;">
+                            Este contrato se rige por el Código de Trabajo de Guatemala
+                        </p>
+                    </div>
+                `;
+            }
+
+            document.getElementById('documentContent').innerHTML = content;
+            document.getElementById('documentModal').classList.add('active');
+        }
+
+        // Form Submissions
+        function submitForm(e) {
+            e.preventDefault();
+            alert('¡Gracias por tu mensaje! Te contactaremos pronto. 🧁');
+            e.target.reset();
+        }
+
+        function submitOrder(e) {
+            e.preventDefault();
+            alert('¡Pedido recibido exitosamente! Nos pondremos en contacto contigo para confirmar los detalles y coordinar la entrega. 🎉🧁');
+            closeModal('orderModal');
+            e.target.reset();
+        }
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('orderModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal('orderModal');
+            }
+        });
+
+        document.getElementById('documentModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal('documentModal');
+            }
+        });
+    </script>
+</body>
+</html>
